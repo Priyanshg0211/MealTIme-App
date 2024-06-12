@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealtime/Screens/onboardingscreen/onboardingone.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -22,15 +23,19 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
             Container(
               height: 50,
-              width: MediaQuery.sizeOf(context).width*0.8,
+              width: MediaQuery.sizeOf(context).width * 0.8,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xff042628),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  )
-                ),
-                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xff042628),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      )),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Onboardingone()));
+                  },
                   child: Text(
                     'Get Started',
                     style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealtime/Screens/IntroScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Meal Time',
       debugShowCheckedModeBanner: false,
+      home: IntroScreen(),
       );
   }
 }

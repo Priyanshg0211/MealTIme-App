@@ -60,7 +60,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/Logo.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -77,7 +77,14 @@ flutter:
   fonts:
     - family: SofiaPro
       fonts:
-        - asset: assets/fonts/
+        - asset: assets/fonts/Sofia Pro Black Az.otf
+        - asset: assets/fonts/Sofia Pro Bold Az.otf
+        - asset: assets/fonts/Sofia Pro ExtraLight Az.otf
+        - asset: assets/fonts/Sofia Pro Light Az.otf
+        - asset: assets/fonts/Sofia Pro Medium Az.otf
+        - asset: assets/fonts/Sofia Pro Regular Az.otf
+        - asset: assets/fonts/Sofia Pro Semi Bold Az.otf
+        - asset: assets/fonts/Sofia Pro UltraLight Az.otf
 
   #   - family: Trajan Pro
   #     fonts:

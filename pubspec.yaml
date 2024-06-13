@@ -72,6 +72,7 @@ flutter:
     - assets/images/onboardingthree.json   
     - assets/images/onboardingfour.json  
     - assets/images/onboardingfive.json   
+    - assets/images/loginbg.png   
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

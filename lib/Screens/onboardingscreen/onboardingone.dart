@@ -68,7 +68,7 @@ class _OnboardingoneState extends State<Onboardingone> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Container(
-                height: 54,
+                height: 50,
                 width: 140,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -88,11 +88,11 @@ class _OnboardingoneState extends State<Onboardingone> {
                     )),
               ),
               Container(
-                height: 54,
+                height: 50,
                 width: 140,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Color(0xff042628),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),

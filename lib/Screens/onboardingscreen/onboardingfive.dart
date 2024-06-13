@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mealtime/Screens/Authnetication/introauthscreen.dart';
 
 class onboarindfive extends StatefulWidget {
   const onboarindfive({super.key});
@@ -12,7 +13,7 @@ class _onboarindfiveState extends State<onboarindfive> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(
           child: Text(
@@ -63,33 +64,33 @@ class _onboarindfiveState extends State<onboarindfive> {
           SizedBox(
             height: 10,
           ),
-              Container(
-                height: 54,
-                width: MediaQuery.sizeOf(context).width*0.9,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff042628),
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        )),
-                    onPressed: () {
-                    /*  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Onboardingthree()));*/
-                    },
-                    child: Text(
-                      "Next",
-                      style: TextStyle(
-                        fontFamily: 'SofiaPro',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 15,
-                      ),
+          Container(
+            height: 50,
+            width: MediaQuery.sizeOf(context).width * 0.9,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xff042628),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     )),
-              ),
-            ],
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => authintroscreen()));
+                },
+                child: Text(
+                  "Next",
+                  style: TextStyle(
+                    fontFamily: 'SofiaPro',
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 15,
+                  ),
+                )),
+          ),
+        ],
       ),
     );
   }

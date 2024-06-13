@@ -56,15 +56,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   greeting,
                   style: TextStyle(
                     fontFamily: 'SofiaPro',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff0A2533),
-                  ),
-                ),
-                Text(
-                  'Alena Sabyan',
-                  style: TextStyle(
-                    fontFamily: 'SofiaPro',
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color(0xff0A2533),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -36,6 +37,27 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
+  Future<void> _signOutAndExitApp() async {
+    await FirebaseAuth.instance.signOut(); // Sign out from Firebase Auth
+    SystemNavigator.pop(); // Exit the app
+  }
+
+ Future<void> _deleteAccount() async {
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  if (currentUser!= null) {
+    try {
+      await currentUser.delete(); // Delete the user account from Firebase Auth
+      // Close the app immediately after successful deletion
+      SystemNavigator.pop(); // Exit the app
+    } on FirebaseAuthException catch (e) {
+      // Handle exceptions, such as requires-recent-login
+      print(e);
+    } catch (e) {
+      // Handle general exceptions
+      print(e);
+    }
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +78,14 @@ class _UserProfileState extends State<UserProfile> {
                   Text(
                     "Email: $_email", // Display user email
                     style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _signOutAndExitApp(),
+                    child: Text('Sign Out'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => _deleteAccount(),
+                    child: Text('Delete Account'),
                   ),
                 ],
               ),

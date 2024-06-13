@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; 
 import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
+import 'package:mealtime/Screens/IntroScreen.dart';
+import 'package:flutter/services.dart';
 
 class UserProfle extends StatefulWidget {
-  const UserProfle({super.key});
+  const UserProfle({Key? key}) : super(key: key);
 
   @override
   State<UserProfle> createState() => _UserProfleState();
 }
 
 class _UserProfleState extends State<UserProfle> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> _signOut() async {
+    await _auth.signOut(); 
+    SystemNavigator.pop(); 
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: IconButton(
+        leading: IconButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            Navigator.pop(context); 
           },
           icon: Icon(
             Icons.arrow_back_ios_rounded,
@@ -37,6 +46,12 @@ class _UserProfleState extends State<UserProfle> {
               ),
             ),
           ),
+        ),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: _signOut,
+          child: Text('Sign Out'),
         ),
       ),
     );

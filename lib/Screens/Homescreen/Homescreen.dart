@@ -8,6 +8,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     final int hour = DateTime.now().hour;
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
               iconData,
               color: Color(0xff4D8194),
             ),
-            SizedBox(width: 8), 
+            SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Text(
-                  'Alena Sabyan', 
+                  'Alena Sabyan',
                   style: TextStyle(
                     fontFamily: 'SofiaPro',
                     fontSize: 20,
@@ -73,6 +75,70 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      body: Column(
+        children: [
+          Text(
+            "Featured",
+            style: TextStyle(
+              fontFamily: 'SofiaPro',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color(0xff0A2533),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 3,
+        color: Colors.white,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home_outlined, color: _selectedIndex == 0 ? Color(0xff70B9BE) : Color(0xff97A2B0)),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.search_outlined, color: _selectedIndex == 1 ? Color(0xff70B9BE) : Color(0xff97A2B0)),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 1;
+                });
+              },
+            ),
+            SizedBox(width: 60), 
+            IconButton(
+              icon: Icon(Icons.notifications_outlined, color: _selectedIndex == 2 ? Color(0xff70B9BE) : Color(0xff97A2B0)),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.person_outlined, color: _selectedIndex == 3 ? Color(0xff70B9BE) : Color(0xff97A2B0)),
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 3;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff042628),
+        child: Icon(Icons.restaurant_menu, color: Colors.white),
+        onPressed: () {
+          print('Center button pressed');
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mealtime/Screens/Homescreen/MealAI.dart';
 import 'package:mealtime/Screens/Homescreen/NotificationScreen.dart';
 import 'package:mealtime/Screens/Homescreen/SearchScreen.dart';
+import 'package:mealtime/Screens/Homescreen/UserProfile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -543,6 +544,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   _selectedIndex = 3;
                 });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => UserProfle()));
               },
             ),
           ],

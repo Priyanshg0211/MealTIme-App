@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   lottie: ^3.1.2
   carousel_slider: ^4.2.1
+  firebase_core: ^3.1.0
 
 dev_dependencies:
   flutter_test:

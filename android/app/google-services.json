@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070504932989",
+    "project_id": "mealtime-d4441",
+    "storage_bucket": "mealtime-d4441.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070504932989:android:7bf97e692d1ebd9624e314",
+        "android_client_info": {
+          "package_name": "com.example.mealtime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkaqy6V7rr0PO7W8US5JFEFe0u-hsIfXU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

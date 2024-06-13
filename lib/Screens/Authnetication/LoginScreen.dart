@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mealtime/Screens/Authnetication/ForgotPassword.dart';
 import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
 
@@ -11,26 +12,121 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = "", password = "";
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    // Check if the user is already signed in
+    _checkCurrentUser();
+  }
+
+  void _checkCurrentUser() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    }
+  }
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final _formkey = GlobalKey<FormState>();
+  bool _obscureText = true;
+
+  userLogin() async {
+    if (_formkey.currentState!.validate()) {
+      try {
+        await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+            "No User Found for that Email",
+            style: TextStyle(fontSize: 15.0),
+          )));
+        } else if (e.code == 'wrong-password') {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+            "Wrong Password Provided by User",
+            style: TextStyle(fontSize: 15.0),
+          )));
+        }
+      }
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      // Trigger the Google Sign In flow
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        // Obtain the GoogleSignInAuthentication object
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        // Create a new credential
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        // Sign in to Firebase with the Google credentials
+        final UserCredential authResult =
+            await _auth.signInWithCredential(credential);
+
+        final User? user = authResult.user;
+
+        if (user != null) {
+          // User signed in successfully
+          print('User signed in with Google: ${user.displayName}');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        } else {
+          // Sign in failed
+          print('Failed to sign in with Google');
+        }
+      } else {
+        // User canceled the sign-in process
+        print('Sign in with Google canceled');
+      }
+    } catch (e) {
+      // Handle errors here
+      print('Error signing in with Google: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            "Login",
-            style: TextStyle(
-              fontFamily: 'SofiaPro',
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff042628),
+      body: Form(
+        key: _formkey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              "Login",
+              style: TextStyle(
+                fontFamily: 'SofiaPro',
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff042628),
+              ),
             ),
-          ),
-          Form(
-            child: Column(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
@@ -50,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: MediaQuery.sizeOf(context).width * 0.9,
                   child: TextFormField(
+                    controller: emailcontroller,
                     cursorColor: Color(0xff042628),
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
@@ -99,6 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: MediaQuery.sizeOf(context).width * 0.9,
                   child: TextFormField(
+                    controller: passwordcontroller,
                     cursorColor: Color(0xff042628),
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
@@ -115,8 +213,28 @@ class _LoginScreenState extends State<LoginScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xffE2E8F0)),
                       ),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      ),
                     ),
-                    keyboardType: TextInputType.name,
+                    obscureText: _obscureText, // Add this line
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 SizedBox(
@@ -156,10 +274,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(16),
                         )),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreen()));
+                      print("The Button is Pressed");
+                      setState(() {
+                        email = emailcontroller.text;
+                        password = passwordcontroller.text;
+                      });
+                      userLogin();
                     },
                     child: Text(
                       'Login',
@@ -186,9 +306,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    print("print");
-                  },
+                  onTap: _signInWithGoogle,
                   child: Image.asset(
                     "assets/images/googleicon.png",
                     height: 40,
@@ -198,8 +316,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

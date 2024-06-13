@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -116,11 +117,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.name,
                   ),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                SizedBox(height: 5,),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.end, 
+                children: [
                   Padding(
                     padding: EdgeInsets.only(right: 10),
-                    child: TextButton(
-                      onPressed: () {},
+                    child: GestureDetector(
+                      onTap: () {
+                        print("Pressed");
+                      },
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -155,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 20,
                 ),
                 Text(
                   'or login with',
@@ -168,11 +174,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Image.asset(
-                  "assets/images/googleicon.png",
-                  height: 40,
-                  width: 40,
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    print("print");
+                  },
+                  child: Image.asset(
+                    "assets/images/googleicon.png",
+                    height: 40,
+                    width: 40,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ],
             ),

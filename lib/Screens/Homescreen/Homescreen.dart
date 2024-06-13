@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mealtime/Screens/Homescreen/MealAI.dart';
 import 'package:mealtime/Screens/Homescreen/NotificationScreen.dart';
 import 'package:mealtime/Screens/Homescreen/SearchScreen.dart';
+import 'package:mealtime/Screens/Homescreen/Shoppingpage.dart';
 import 'package:mealtime/Screens/Homescreen/UserProfile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -79,6 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.black,
             onPressed: () {
               print('Shopping cart icon pressed');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Shoppingpage()));
             },
           ),
         ],

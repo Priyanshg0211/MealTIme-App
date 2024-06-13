@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mealtime/Screens/Homescreen/MealAI.dart';
+import 'package:mealtime/Screens/Homescreen/SearchScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -499,6 +500,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   _selectedIndex = 0;
                 });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
               },
             ),
             IconButton(
@@ -510,6 +513,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   _selectedIndex = 1;
                 });
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Searchscreen()));
               },
             ),
             SizedBox(width: 60),

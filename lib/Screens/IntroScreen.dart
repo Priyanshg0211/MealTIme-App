@@ -43,7 +43,7 @@ class _IntroScreenState extends State<IntroScreen> {
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   )),
-            )
+            ),
           ],
         ),
       ),

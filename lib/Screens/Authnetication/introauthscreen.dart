@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mealtime/Screens/Authnetication/LoginScreen.dart';
+import 'package:mealtime/Screens/Authnetication/RegisterScreen.dart';
 
 class authintroscreen extends StatefulWidget {
   const authintroscreen({super.key});
@@ -59,6 +60,8 @@ class _authintroscreenState extends State<authintroscreen> {
           GestureDetector(
             onTap: () {
               print("pressed");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegisterScreen()));
             },
             child: Text(
               "Create New Acoount",

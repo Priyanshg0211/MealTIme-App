@@ -12,12 +12,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email = "", password = "";
-  TextEditingController emailcontroller = TextEditingController();
-  TextEditingController passwordcontroller = TextEditingController();
+ String email = "", password = "";
+  TextEditingController emailcontroller = new TextEditingController();
+  TextEditingController passwordcontroller = new TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   @override
   void initState() {
     super.initState();
@@ -36,30 +35,28 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final GoogleSignIn googleSignIn = GoogleSignIn();
+
   final _formkey = GlobalKey<FormState>();
   bool _obscureText = true;
 
   userLogin() async {
-    if (_formkey.currentState!.validate()) {
-      try {
-        await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-            "No User Found for that Email",
-            style: TextStyle(fontSize: 15.0),
-          )));
-        } else if (e.code == 'wrong-password') {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              content: Text(
-            "Wrong Password Provided by User",
-            style: TextStyle(fontSize: 15.0),
-          )));
-        }
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          "No User Found for that Email",
+          style: TextStyle(fontSize: 15.0),
+        )));
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          "Wrong Password Provided by User",
+          style: TextStyle(fontSize: 15.0),
+        )));
       }
     }
   }
@@ -105,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
       print('Error signing in with Google: $e');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Container(
                   width: MediaQuery.sizeOf(context).width * 0.9,
                   child: TextFormField(
-                    controller: passwordcontroller,
+                     controller: passwordcontroller,
                     cursorColor: Color(0xff042628),
                     decoration: InputDecoration(
                       hintText: 'Enter your password',
@@ -227,7 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     ),
-                    obscureText: _obscureText, // Add this line
+                    obscureText: _obscureText,
                     keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -274,11 +272,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(16),
                         )),
                     onPressed: () {
-                      print("The Button is Pressed");
-                      setState(() {
-                        email = emailcontroller.text;
-                        password = passwordcontroller.text;
-                      });
+                     print("The Button is Pressed");
+                      if (_formkey.currentState!.validate()) {
+                        setState(() {
+                          email = emailcontroller.text;
+                          password = passwordcontroller.text;
+                        });
+                      }
                       userLogin();
                     },
                     child: Text(

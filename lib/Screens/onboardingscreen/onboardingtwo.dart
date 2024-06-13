@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mealtime/Screens/onboardingscreen/onboardingthree.dart';
 
 class Onboardingtwo extends StatefulWidget {
   const Onboardingtwo({super.key});
@@ -97,10 +98,10 @@ class _OnboardingtwoState extends State<Onboardingtwo> {
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
-                     /* Navigator.push(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Onboardingthree()));*/
+                              builder: (context) => Onboardingthree()));
                     },
                     child: Text(
                       "Next",

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mealtime/Screens/onboardingscreen/onbiardingtwo.dart';
 
-class Onboardingone extends StatefulWidget {
-  const Onboardingone({super.key});
+class Onboardingtwo extends StatefulWidget {
+  const Onboardingtwo({super.key});
 
   @override
-  State<Onboardingone> createState() => _OnboardingoneState();
+  State<Onboardingtwo> createState() => _OnboardingtwoState();
 }
 
-class _OnboardingoneState extends State<Onboardingone> {
+class _OnboardingtwoState extends State<Onboardingtwo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(
           child: Text(
@@ -32,19 +31,19 @@ class _OnboardingoneState extends State<Onboardingone> {
             height: MediaQuery.sizeOf(context).height * 0.4,
             width: MediaQuery.sizeOf(context).width,
             child: LottieBuilder.asset(
-              "assets/images/onboardingone.json",
+              "assets/images/onboardingtwo.json",
               frameRate: FrameRate.max,
             ),
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.2,
-            child: Image.asset("assets/images/loaderone.png"),
+            child: Image.asset("assets/images/loadertwo.png"),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            " Welcome to Your Ultimate\nCooking Companion",
+            "Step-by-Step Video\nTutorials",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class _OnboardingoneState extends State<Onboardingone> {
             textAlign: TextAlign.center,
           ),
           Text(
-            "Discover delicious recipes, personalized just\nfor you. Let's make cooking fun and\neffortless!",
+            "Master new recipes with our easy-to-follow\nvideo guides. Perfect for beginners and\npros alike!",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.w500,
@@ -98,10 +97,10 @@ class _OnboardingoneState extends State<Onboardingone> {
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
-                      Navigator.push(
+                     /* Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Onboardingtwo()));
+                              builder: (context) => Onboardingthree()));*/
                     },
                     child: Text(
                       "Next",

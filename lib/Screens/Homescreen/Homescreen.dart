@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Alena Sabyan', 
                   style: TextStyle(
                     fontFamily: 'SofiaPro',
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color(0xff0A2533),
                   ),

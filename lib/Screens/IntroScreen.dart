@@ -23,7 +23,7 @@ class _IntroScreenState extends State<IntroScreen> {
             ),
             Container(
               height: 50,
-              width: MediaQuery.sizeOf(context).width * 0.8,
+              width: MediaQuery.sizeOf(context).width * 0.9,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff042628),

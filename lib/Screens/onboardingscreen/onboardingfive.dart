@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mealtime/Screens/onboardingscreen/onboardingfive.dart';
 
-class onboardingfour extends StatefulWidget {
-  const onboardingfour({super.key});
+class onboarindfive extends StatefulWidget {
+  const onboarindfive({super.key});
 
   @override
-  State<onboardingfour> createState() => _onboardingfourState();
+  State<onboarindfive> createState() => _onboarindfiveState();
 }
 
-class _onboardingfourState extends State<onboardingfour> {
+class _onboarindfiveState extends State<onboarindfive> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Center(
           child: Text(
@@ -32,19 +31,19 @@ class _onboardingfourState extends State<onboardingfour> {
             height: MediaQuery.sizeOf(context).height * 0.4,
             width: MediaQuery.sizeOf(context).width,
             child: LottieBuilder.asset(
-              "assets/images/onboardingfour.json",
+              "assets/images/onboardingfive.json",
               frameRate: FrameRate.max,
             ),
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.2,
-            child: Image.asset("assets/images/loaderfour.png"),
+            child: Image.asset("assets/images/loaderfive.png"),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            "Enhance Your\nKitchen Experience",
+            " New Recipes, Just\nfor You",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class _onboardingfourState extends State<onboardingfour> {
             textAlign: TextAlign.center,
           ),
           Text(
-            "Discover top-rated kitchen tools and\ningredients. We recommend the best\nproducts to elevate your cooking.",
+            "Let our AI surprise you with creative meal\nideas based on what you love. Endless\nculinary inspiration awaits!",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.w500,
@@ -64,44 +63,21 @@ class _onboardingfourState extends State<onboardingfour> {
           SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
               Container(
                 height: 54,
-                width: 140,
+                width: MediaQuery.sizeOf(context).width*0.9,
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        )),
-                    onPressed: () {},
-                    child: Text(
-                      "Skip",
-                      style: TextStyle(
-                          fontFamily: 'SofiaPro',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    )),
-              ),
-              Container(
-                height: 54,
-                width: 140,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
+                        backgroundColor: Color(0xff042628),
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
-                      Navigator.push(
+                    /*  Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => onboarindfive()));
+                              builder: (context) => Onboardingthree()));*/
                     },
                     child: Text(
                       "Next",
@@ -114,8 +90,6 @@ class _onboardingfourState extends State<onboardingfour> {
                     )),
               ),
             ],
-          )
-        ],
       ),
     );
   }

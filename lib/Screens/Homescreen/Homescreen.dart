@@ -548,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _selectedIndex = 3;
                 });
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserProfle()));
+                    MaterialPageRoute(builder: (context) => UserProfile()));
               },
             ),
           ],

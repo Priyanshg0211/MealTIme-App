@@ -1,59 +1,65 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; 
-import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
-import 'package:mealtime/Screens/IntroScreen.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UserProfle extends StatefulWidget {
-  const UserProfle({Key? key}) : super(key: key);
-
+class UserProfile extends StatefulWidget {
   @override
-  State<UserProfle> createState() => _UserProfleState();
+  _UserProfileState createState() => _UserProfileState();
 }
 
-class _UserProfleState extends State<UserProfle> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class _UserProfileState extends State<UserProfile> {
+  late String _name; // Declare _name as late
+  late String _email; // Declare _email as late
+  bool _isLoading = true; // Flag to check if data is loading
 
-  Future<void> _signOut() async {
-    await _auth.signOut(); 
-    SystemNavigator.pop(); 
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    await Future.delayed(Duration(seconds: 2)); // Simulate network delay
+    // Fetch user data from Firebase Auth
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser!= null) {
+      setState(() {
+        _name = currentUser.displayName?? "No Name";
+        _email = currentUser.email?? "No Email";
+        _isLoading = false; // Data loaded, update flag
+      });
+    } else {
+      setState(() {
+        _name = "Not logged in";
+        _email = "Not logged in";
+        _isLoading = false; // Data loaded, update flag
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context); 
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Color(0xff0A2533),
-          ),
-        ),
-        title: Center(
-          child: Container(
-            margin: EdgeInsets.only(right: 40),
-            child: Text(
-              textAlign: TextAlign.center,
-              "Account",
-              style: TextStyle(
-                fontFamily: 'SofiaPro',
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xff0A2533),
+        title: Text("User Profile"),
+      ),
+      body: _isLoading
+         ? Center(child: CircularProgressIndicator()) // Show loading spinner while data is loading
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Name: $_name", // Display user name
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  Text(
+                    "Email: $_email", // Display user email
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: _signOut,
-          child: Text('Sign Out'),
-        ),
-      ),
     );
   }
 }

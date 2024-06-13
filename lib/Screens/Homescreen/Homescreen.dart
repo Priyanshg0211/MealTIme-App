@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mealtime/Screens/Homescreen/MealAI.dart';
+import 'package:mealtime/Screens/Homescreen/NotificationScreen.dart';
 import 'package:mealtime/Screens/Homescreen/SearchScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -527,6 +528,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   _selectedIndex = 2;
                 });
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotificationScreen()));
               },
             ),
             IconButton(

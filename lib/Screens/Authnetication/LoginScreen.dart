@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mealtime/Screens/Authnetication/ForgotPassword.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -117,15 +118,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     keyboardType: TextInputType.name,
                   ),
                 ),
-                SizedBox(height: 5,),
-                Row(
-                mainAxisAlignment: MainAxisAlignment.end, 
-                children: [
+                SizedBox(
+                  height: 5,
+                ),
+                Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                   Padding(
                     padding: EdgeInsets.only(right: 10),
                     child: GestureDetector(
                       onTap: () {
                         print("Pressed");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ForgotPassword()));
                       },
                       child: Text(
                         'Forgot Password?',

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mealtime/Screens/Homescreen/MealAI.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -84,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 10,right: 250),
+              padding: const EdgeInsets.only(top: 10, right: 250),
               child: Text(
                 "Featured",
                 style: TextStyle(
@@ -271,13 +272,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.white, width: 8), // White border
-                                  borderRadius:
-                                      BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
+                                      color: Colors.white,
+                                      width: 8), // White border
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                      bottom: Radius.circular(16)),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                      bottom: Radius.circular(16)),
                                   child: Image.asset(
                                     'assets/images/dishone.png',
                                     fit: BoxFit.cover,
@@ -294,7 +298,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     isHeartPressed
                                         ? Icons.favorite
                                         : Icons.favorite_border,
-                                    color: isHeartPressed ? Colors.red : Colors.white,
+                                    color: isHeartPressed
+                                        ? Colors.red
+                                        : Colors.white,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -359,8 +365,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10,),
-                   Container(
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
                     height: MediaQuery.sizeOf(context).height * 0.35,
                     width: MediaQuery.sizeOf(context).width * 0.6,
                     child: Card(
@@ -376,13 +384,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                      color: Colors.white, width: 8), // White border
-                                  borderRadius:
-                                      BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
+                                      color: Colors.white,
+                                      width: 8), // White border
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                      bottom: Radius.circular(16)),
                                 ),
                                 child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.vertical(top: Radius.circular(16),bottom: Radius.circular(16)),
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16),
+                                      bottom: Radius.circular(16)),
                                   child: Image.asset(
                                     'assets/images/dishtwo.png',
                                     fit: BoxFit.cover,
@@ -399,7 +410,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     isHeartPressed
                                         ? Icons.favorite
                                         : Icons.favorite_border,
-                                    color: isHeartPressed ? Colors.red : Colors.white,
+                                    color: isHeartPressed
+                                        ? Colors.red
+                                        : Colors.white,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -530,6 +543,8 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Icon(Icons.restaurant_menu, color: Colors.white),
         onPressed: () {
           print('Center button pressed');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MealAI()));
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mealtime/Screens/onboardingscreen/onboardingfour.dart';
 
-class Onboardingthree extends StatefulWidget {
-  const Onboardingthree({super.key});
+class onboardingfour extends StatefulWidget {
+  const onboardingfour({super.key});
 
   @override
-  State<Onboardingthree> createState() => _OnboardingthreeState();
+  State<onboardingfour> createState() => _onboardingfourState();
 }
 
-class _OnboardingthreeState extends State<Onboardingthree> {
+class _onboardingfourState extends State<onboardingfour> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,19 +31,19 @@ class _OnboardingthreeState extends State<Onboardingthree> {
             height: MediaQuery.sizeOf(context).height * 0.4,
             width: MediaQuery.sizeOf(context).width,
             child: LottieBuilder.asset(
-              "assets/images/onboardingthree.json",
+              "assets/images/onboardingfour.json",
               frameRate: FrameRate.max,
             ),
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.2,
-            child: Image.asset("assets/images/loaderthree.png"),
+            child: Image.asset("assets/images/loaderfour.png"),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            "Recipes Tailored\nto Your Taste",
+            "Enhance Your\nKitchen Experience",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.bold,
@@ -53,7 +52,7 @@ class _OnboardingthreeState extends State<Onboardingthree> {
             textAlign: TextAlign.center,
           ),
           Text(
-            "Get recipe suggestions based on your\npreferences, dietary needs, and favorite\ningredients. Cooking made personal!",
+            "Discover top-rated kitchen tools and\ningredients. We recommend the best\nproducts to elevate your cooking.",
             style: TextStyle(
                 fontFamily: 'SofiaPro',
                 fontWeight: FontWeight.w500,
@@ -98,10 +97,10 @@ class _OnboardingthreeState extends State<Onboardingthree> {
                           borderRadius: BorderRadius.circular(10),
                         )),
                     onPressed: () {
-                     Navigator.push(
+                    /*  Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => onboardingfour()));
+                              builder: (context) => Onboardingthree()));*/
                     },
                     child: Text(
                       "Next",

@@ -65,9 +65,13 @@ flutter:
     - assets/images/loaderone.png   
     - assets/images/loadertwo.png   
     - assets/images/loaderthree.png
+    - assets/images/loaderfour.png
+    - assets/images/loaderfive.png
     - assets/images/onboardingone.json
     - assets/images/onboardingtwo.json   
     - assets/images/onboardingthree.json   
+    - assets/images/onboardingfour.json  
+    - assets/images/onboardingfive.json   
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

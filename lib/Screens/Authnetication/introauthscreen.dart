@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mealtime/Screens/Authnetication/LoginScreen.dart';
 
 class authintroscreen extends StatefulWidget {
   const authintroscreen({super.key});
@@ -18,7 +19,7 @@ class _authintroscreenState extends State<authintroscreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            height: MediaQuery.sizeOf(context).height*0.6,
+            height: MediaQuery.sizeOf(context).height * 0.6,
             width: MediaQuery.sizeOf(context).width,
             child: Image.asset("assets/images/authinfoscreeassest.png"),
           ),
@@ -41,7 +42,10 @@ class _authintroscreenState extends State<authintroscreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   )),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+              },
               child: Text(
                 'Login',
                 style: TextStyle(
@@ -56,12 +60,15 @@ class _authintroscreenState extends State<authintroscreen> {
             onTap: () {
               print("pressed");
             },
-            child: Text("Create New Acoount",style: TextStyle(
-              fontFamily: 'SofiaPro',
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-              color: Colors.white,
-            ),),
+            child: Text(
+              "Create New Acoount",
+              style: TextStyle(
+                fontFamily: 'SofiaPro',
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
           )
         ],
       ),

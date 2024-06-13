@@ -74,6 +74,8 @@ flutter:
     - assets/images/onboardingfive.json   
     - assets/images/loginbg.png   
     - assets/images/authinfoscreeassest.png   
+    - assets/images/SSO Icon.png  
+    - assets/images/googleicon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

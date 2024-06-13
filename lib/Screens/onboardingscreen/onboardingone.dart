@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:mealtime/Screens/onboardingscreen/onbiardingtwo.dart';
+import 'package:mealtime/Screens/onboardingscreen/onboardingtwo.dart';
 
 class Onboardingone extends StatefulWidget {
   const Onboardingone({super.key});

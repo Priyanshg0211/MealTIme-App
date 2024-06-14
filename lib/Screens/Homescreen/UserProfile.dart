@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:mealtime/Screens/Authnetication/introauthscreen.dart';
 import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
 
 class UserProfile extends StatefulWidget {
@@ -40,7 +41,7 @@ class _UserProfileState extends State<UserProfile> {
 
   Future<void> _signOutAndExitApp() async {
     await FirebaseAuth.instance.signOut(); // Sign out from Firebase Auth
-    SystemNavigator.pop(); // Exit the app
+     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => authintroscreen()));
   }
 
   Future<void> _deleteAccount() async {

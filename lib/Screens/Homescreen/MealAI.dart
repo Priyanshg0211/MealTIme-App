@@ -80,44 +80,49 @@ class _MealAIState extends State<MealAI> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: TextFormField(
-                  autofocus: true,
-                  autocorrect: true,
-                  focusNode: focusNode,
-                  controller: controller,
-                  onFieldSubmitted: (value) {
-                    if (value.trim().isNotEmpty) {
-                      setState(() {
-                        inputTags.add(value.trim());
-                        controller.clear();
-                        focusNode.requestFocus();
-                      });
-                    }
-                  },
-                  cursorColor: Color(0xff042628),
-                  decoration: InputDecoration(
-                    hintText: 'Enter the ingredient here....',
-                    hintStyle: TextStyle(
-                      fontFamily: 'SofiaPro',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14,
-                      color: Color(0xff94A3B8),
-                    ),
-                    border: InputBorder.none,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffE2E8F0)),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Color(0xffE2E8F0)),
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  child: TextFormField(
+                    autofocus: true,
+                    autocorrect: true,
+                    focusNode: focusNode,
+                    controller: controller,
+                    onFieldSubmitted: (value) {
+                      if (value.trim().isNotEmpty) {
+                        setState(() {
+                          inputTags.add(value.trim());
+                          controller.clear();
+                          focusNode.requestFocus();
+                        });
+                      }
+                    },
+                    cursorColor: Color(0xff042628),
+                    decoration: InputDecoration(
+                      hintText: 'Enter the ingredient here....',
+                      hintStyle: TextStyle(
+                        fontFamily: 'SofiaPro',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14,
+                        color: Color(0xff94A3B8),
+                      ),
+                      border: InputBorder.none,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffE2E8F0)),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xffE2E8F0)),
+                      ),
                     ),
                   ),
                 ),
               ),
               Container(
-                color: Colors.cyanAccent[200],
+                decoration: BoxDecoration(
+                  color: Color(0xff70B9BE),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Padding(
                   padding: const EdgeInsets.all(9),
                   child: IconButton(
@@ -133,7 +138,7 @@ class _MealAIState extends State<MealAI> {
                     icon: Icon(
                       Icons.add,
                       color: Colors.white,
-                      size: 30,
+                      size: 20,
                     ),
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -8,9 +9,9 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  late String _name; // Declare _name as late
-  late String _email; // Declare _email as late
-  bool _isLoading = true; // Flag to check if data is loading
+  late String _name;
+  late String _email;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -19,20 +20,20 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Future<void> _loadUserData() async {
-    await Future.delayed(Duration(seconds: 2)); // Simulate network delay
+    await Future.delayed(Duration(seconds: 5));
     // Fetch user data from Firebase Auth
     User? currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser!= null) {
+    if (currentUser != null) {
       setState(() {
-        _name = currentUser.displayName?? "No Name";
-        _email = currentUser.email?? "No Email";
-        _isLoading = false; // Data loaded, update flag
+        _name = currentUser.displayName ?? "No Name";
+        _email = currentUser.email ?? "No Email";
+        _isLoading = false;
       });
     } else {
       setState(() {
         _name = "Not logged in";
         _email = "Not logged in";
-        _isLoading = false; // Data loaded, update flag
+        _isLoading = false;
       });
     }
   }
@@ -42,53 +43,130 @@ class _UserProfileState extends State<UserProfile> {
     SystemNavigator.pop(); // Exit the app
   }
 
- Future<void> _deleteAccount() async {
-  User? currentUser = FirebaseAuth.instance.currentUser;
-  if (currentUser!= null) {
-    try {
-      await currentUser.delete(); // Delete the user account from Firebase Auth
-      // Close the app immediately after successful deletion
-      SystemNavigator.pop(); // Exit the app
-    } on FirebaseAuthException catch (e) {
-      // Handle exceptions, such as requires-recent-login
-      print(e);
-    } catch (e) {
-      // Handle general exceptions
-      print(e);
+  Future<void> _deleteAccount() async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      try {
+        await currentUser
+            .delete(); // Delete the user account from Firebase Auth
+        SystemNavigator.pop();
+      } on FirebaseAuthException catch (e) {
+        // Handle exceptions, such as requires-recent-login
+        print(e);
+      } catch (e) {
+        print(e);
+      }
     }
   }
-}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Profile"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Color(0xff0A2533),
+          ),
+        ),
+        title: Center(
+          child: Container(
+            margin: EdgeInsets.only(right: 40),
+            child: Text(
+              textAlign: TextAlign.center,
+              "Account",
+              style: TextStyle(
+                fontFamily: 'SofiaPro',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xff0A2533),
+              ),
+            ),
+          ),
+        ),
       ),
       body: _isLoading
-         ? Center(child: CircularProgressIndicator()) // Show loading spinner while data is loading
+          ? Center(child: CircularProgressIndicator())
           : Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "Name: $_name", // Display user name
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Text(
-                    "Email: $_email", // Display user email
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _signOutAndExitApp(),
-                    child: Text('Sign Out'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _deleteAccount(),
-                    child: Text('Delete Account'),
-                  ),
-                ],
-              ),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        "Name: $_name", // Display user name
+                        style: TextStyle(
+                            fontFamily: 'SofiaPro',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        "Email: $_email",
+                        style: TextStyle(
+                            fontFamily: 'SofiaPro',
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: Colors.black),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child: Container(
+                        height: 50,
+                        width: MediaQuery.sizeOf(context).width * 0.9,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff042628),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              )),
+                          onPressed: () => _signOutAndExitApp(),
+                          child: Text(
+                            'Sign Out',
+                            style: TextStyle(
+                                fontFamily: 'SofiaPro',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                      child: Container(
+                        height: 50,
+                        width: MediaQuery.sizeOf(context).width * 0.9,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xff042628),
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              )),
+                          onPressed: () => _deleteAccount(),
+                          child: Text(
+                            'Delete Account',
+                            style: TextStyle(
+                                fontFamily: 'SofiaPro',
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
             ),
     );
   }

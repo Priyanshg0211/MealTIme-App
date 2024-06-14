@@ -496,8 +496,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {
                   _selectedIndex = 0;
                 });
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
               },
             ),
             IconButton(

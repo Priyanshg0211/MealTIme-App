@@ -69,7 +69,4 @@ MealTime is a user-friendly mobile application designed to simplify meal plannin
 
 ---
 
-Thank you for using MealTime! Enjoy your cooking experience!
-```
-
 

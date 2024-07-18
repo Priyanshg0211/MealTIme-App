@@ -72,4 +72,4 @@ MealTime is a user-friendly mobile application designed to simplify meal plannin
 Thank you for using MealTime! Enjoy your cooking experience!
 ```
 
-This `README.md` file provides a comprehensive guide to setting up, running, and contributing to the MealTime app. It covers the app's features, technical stack, installation steps, usage instructions, contribution guidelines, license information, and contact details.
+

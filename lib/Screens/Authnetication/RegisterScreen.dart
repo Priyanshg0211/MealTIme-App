@@ -62,9 +62,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         final User? user = authResult.user;
 
-        if (user != null) {
-          // Store user data in Firestore
-          await _firestore.collection('users').doc(user.uid).set({
+        if (user != null && user.email != null) {
+          // Store user data in Firestore using email as document ID
+          await _firestore.collection('users').doc(user.email).set({
             'name': user.displayName,
             'email': user.email,
             'createdAt': FieldValue.serverTimestamp(),
@@ -103,11 +103,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
 
-        // Add this block to store user data in Firestore
-        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        // Store user data in Firestore using email as document ID
+        await _firestore.collection('users').doc(email).set({
           'name': name,
           'email': email,
           'createdAt': FieldValue.serverTimestamp(),
+          'lastSignInAt': FieldValue.serverTimestamp(),
+          'signInMethod': 'email',
         });
 
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -132,7 +134,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           )));
         }
       } catch (e) {
-        // Add this block to handle Firestore errors
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
           "Error saving user data: $e",

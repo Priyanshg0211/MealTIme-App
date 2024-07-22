@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mealtime/Screens/Authnetication/introauthscreen.dart';
 import 'package:mealtime/Screens/Homescreen/Homescreen.dart';
 
@@ -17,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailcontroller = new TextEditingController();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -38,6 +41,59 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _obscureText = true;
   final _formkey = GlobalKey<FormState>();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
+
+      if (googleSignInAccount != null) {
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleSignInAuthentication.accessToken,
+          idToken: googleSignInAuthentication.idToken,
+        );
+
+        final UserCredential authResult =
+            await _auth.signInWithCredential(credential);
+
+        final User? user = authResult.user;
+
+        if (user != null) {
+          // Store user data in Firestore
+          await _firestore.collection('users').doc(user.uid).set({
+            'name': user.displayName,
+            'email': user.email,
+            'createdAt': FieldValue.serverTimestamp(),
+            'lastSignInAt': FieldValue.serverTimestamp(),
+            'signInMethod': 'google',
+          }, SetOptions(merge: true));
+
+          print('User signed in with Google: ${user.displayName}');
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Signed in successfully with Google"),
+          ));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        } else {
+          print('Failed to sign in with Google');
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Failed to sign in with Google"),
+          ));
+        }
+      } else {
+        print('Sign in with Google canceled');
+      }
+    } catch (e) {
+      print('Error signing in with Google: $e');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Error signing in with Google: $e"),
+      ));
+    }
+  }
 
   registration() async {
     if (password != null &&
@@ -46,6 +102,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password);
+
+        // Add this block to store user data in Firestore
+        await _firestore.collection('users').doc(userCredential.user!.uid).set({
+          'name': name,
+          'email': email,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(
           "Registered Successfully",
@@ -67,6 +131,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
             style: TextStyle(fontSize: 15.0),
           )));
         }
+      } catch (e) {
+        // Add this block to handle Firestore errors
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+          "Error saving user data: $e",
+          style: TextStyle(fontSize: 15.0),
+        )));
       }
     }
   }
@@ -284,6 +355,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           fontSize: 16,
                           color: Colors.white),
                     ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  'or signup with',
+                  style: TextStyle(
+                    fontFamily: 'SofiaPro',
+                    fontSize: 14,
+                    color: Color(0xff64748B),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                GestureDetector(
+                  onTap: _signInWithGoogle,
+                  child: Image.asset(
+                    "assets/images/googleicon.png",
+                    height: 40,
+                    width: 40,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ],
